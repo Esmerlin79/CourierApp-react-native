@@ -34,7 +34,7 @@ const LoginScreen = ({ navigation }: Props) => {
         if( username.trim() === '' || password.trim() === '') 
                 return addErrorMessage('Please type username and password');
         
-        if(/[^a-zA-Z0-0]/.test(username) || /[^a-zA-Z0-0]/.test(password)) 
+        if(!/^[A-Za-z0-9\s]+$/g.test(username) || !/^[A-Za-z0-9\s]+$/g.test(password)) 
                 return addErrorMessage('Special character are not allowed');
 
         signIn(username, password);
