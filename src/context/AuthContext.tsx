@@ -8,6 +8,7 @@ export interface AuthContextProps {
     authenticated: boolean;
     errorMessage: string;
     isLoading: boolean;
+    username: string,
     signIn: ( username: string, password: string ) => void;
     addErrorMessage: (message: string) => void;
     resetError: () => void;
@@ -18,6 +19,7 @@ const initialState = {
         fullName: '',
         accountNumber: ''
      },
+     username: '',
      authenticated: false,
      errorMessage: '',
 }
@@ -43,6 +45,7 @@ const AuthProvider = ({ children }: any) => {
             ...state,
             user: resp.data.responseObject,
             authenticated: true,
+            username
         })
         setIsLoading(false);
     }
