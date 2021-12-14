@@ -1,8 +1,14 @@
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import React from 'react';
 
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { getImageStatus } from '../helpers/utils';
-import { Package, StatusHistory } from '../interfaces/appInterfaces'
+import { Package, PackagesDetailsParams, StatusHistory } from '../interfaces/appInterfaces'
+import { RootPackagesNavigatorParams } from '../navigator/PackagesNavigator';
+
+
+type NavigationProps = StackNavigationProp<RootPackagesNavigatorParams, 'PackagesScreen'>;
 
 interface Props {
     packageItem: Package;
@@ -10,16 +16,28 @@ interface Props {
 
 const PackageItem = ({ packageItem }: Props) => {
 
-    const { description, statusHistory} = packageItem;
+    const { description, statusHistory, weight, courier, courierTracking, internalTracking, priceToPay, supplier} = packageItem;
+    const navigation = useNavigation<NavigationProps>()
 
     const status: StatusHistory = statusHistory[statusHistory.length - 1 ];
     const dateFormatted = status.date.replace('/', '.').replace('/', '.');
     const imgIconStatus = getImageStatus( status.description );
+
+    const navigationParams: PackagesDetailsParams = {
+        description: description,
+        weight: weight,
+        courier: courier,
+        courierTracking: courierTracking,
+        internalTracking: internalTracking,
+        priceToPay: priceToPay,
+        supplier: supplier
+    }
     
     return (
         <TouchableOpacity 
             activeOpacity={ 0.6 }
             style={ styles.container }
+            onPress={ () => navigation.navigate('PackageDetailsScreen', navigationParams ) }
         >
             <Image 
                 source={ imgIconStatus }

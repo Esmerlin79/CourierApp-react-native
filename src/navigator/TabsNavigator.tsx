@@ -2,9 +2,9 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import PackagesScreen from '../screen/PackagesScreen';
 import OfficeScreen from '../screen/OfficeScreen';
 import { Platform } from 'react-native';
+import PackagesNavigator from './PackagesNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,8 +28,8 @@ const HomeNavigator = () => {
       }}
     >
       <Tab.Screen 
-          name="PackagesScreen" 
-          component={PackagesScreen} 
+          name="PackagesNavigator" 
+          component={PackagesNavigator} 
           options={{
             tabBarLabel:"Paquetes",
             tabBarIcon: ({ color, size}) => <Icon name="cube-outline" size={35} color={color} />

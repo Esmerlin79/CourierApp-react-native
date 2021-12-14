@@ -36,3 +36,25 @@ export interface StatusHistory {
 }
 
 
+export interface StatusesResponse {
+    responseObject: Statuses[];
+    exception:      null;
+    success:        boolean;
+    dateTime:       string;
+}
+
+export interface Statuses {
+    description: status;
+    date:        string;
+}
+
+
+export interface PackagesDetailsParams {
+    description:      string;
+    weight:           number;
+    priceToPay:       number;
+    supplier:         string;
+    courier:          string;
+    courierTracking:  string;
+    internalTracking: string;
+}

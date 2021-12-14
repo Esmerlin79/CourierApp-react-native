@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react'
 import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -7,6 +8,9 @@ interface Props {
 }
 
 const Header = ({ backButton = false }: Props) => {
+
+    const navigation = useNavigation();
+
     return (
         <View style={{ ...styles.container, height: Platform.OS === 'android' ? 115 : 130 }}>
             <View style={{ height: 30 }}></View>
@@ -15,6 +19,7 @@ const Header = ({ backButton = false }: Props) => {
                 { backButton && (
                     <TouchableOpacity
                         activeOpacity={ 0.8 }
+                        onPress={ () => navigation.goBack() }
                     >
                         <Icon name='chevron-back-outline' size={40} color="white" />
                     </TouchableOpacity>
